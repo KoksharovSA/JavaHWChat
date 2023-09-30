@@ -18,11 +18,13 @@ public class Logger {
         String result = "";
         try {
             File logFile = new File(FILE_NAME);
-            Scanner myReader = new Scanner(logFile);
-            while (myReader.hasNextLine()) {
-                result += myReader.nextLine() + "\n";
+            if (logFile.exists()){
+                Scanner myReader = new Scanner(logFile);
+                while (myReader.hasNextLine()) {
+                    result += myReader.nextLine() + "\n";
+                }
+                myReader.close();
             }
-            myReader.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

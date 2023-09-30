@@ -86,7 +86,6 @@ public class ChatWindow extends JFrame {
             }
         });
         textAreaChat = new JTextArea();
-//        textAreaChat.setText(logger.readLog());
         textAreaChat.setEditable(false);
         textAreaChat.setWrapStyleWord(true);
 
