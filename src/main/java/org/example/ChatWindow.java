@@ -45,6 +45,7 @@ public class ChatWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 netStatus = "Online";
                 setTitle("OnlineChat - " + netStatus);
+                textAreaChat.setText(logger.readLog());
             }
         });
         labelName = new JLabel("Name");
@@ -85,7 +86,7 @@ public class ChatWindow extends JFrame {
             }
         });
         textAreaChat = new JTextArea();
-        textAreaChat.setText(logger.readLog());
+//        textAreaChat.setText(logger.readLog());
         textAreaChat.setEditable(false);
         textAreaChat.setWrapStyleWord(true);
 
