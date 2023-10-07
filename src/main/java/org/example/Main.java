@@ -1,7 +1,7 @@
 package org.example;
 
 import org.example.client.Client;
-import org.example.client.Server;
+import org.example.server.Server;
 import org.example.server.IServer;
 
 public class Main {

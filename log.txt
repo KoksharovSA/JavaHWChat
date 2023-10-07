@@ -7,3 +7,5 @@ Serg: Привет
 Art: Привет
 Serg: Как дела?
 Art: Нормально
+Serg: Arr
+Art: Aga

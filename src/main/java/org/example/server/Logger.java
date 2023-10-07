@@ -3,9 +3,9 @@ package org.example.server;
 import java.io.*;
 import java.util.Scanner;
 
-public class Logger {
+public class Logger implements ILogger{
     private final String FILE_NAME = "log.txt";
-
+    @Override
     public void writeLog(String text) throws IOException {
         FileWriter myWriter = new FileWriter(FILE_NAME);
         if (text != null && text != ""){
@@ -14,6 +14,7 @@ public class Logger {
         myWriter.close();
     }
 
+    @Override
     public String readLog(){
         String result = "";
         try {

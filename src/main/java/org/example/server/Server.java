@@ -1,5 +1,6 @@
-package org.example.client;
+package org.example.server;
 
+import org.example.client.IClient;
 import org.example.server.IServer;
 import org.example.server.Logger;
 
@@ -10,7 +11,7 @@ import java.util.List;
 public class Server implements IServer {
     private List<IClient> clients;
     private String messages;
-    private Logger logger;
+    private ILogger logger;
     public Server() {
         clients = new ArrayList<>();
         logger = new Logger();
