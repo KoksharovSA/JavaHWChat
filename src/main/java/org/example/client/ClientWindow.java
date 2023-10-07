@@ -1,4 +1,6 @@
-package org.example;
+package org.example.client;
+
+import org.example.server.Logger;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,7 +11,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
-public class ChatWindow extends JFrame {
+public class ClientWindow extends JFrame implements IWindow{
+    private IClient client;
     Logger logger = new Logger();
     private static final int WIDTH = 500;
     private static final int HEIGHT = 650;
@@ -19,21 +22,28 @@ public class ChatWindow extends JFrame {
     JLabel labelIP, labelPort, labelName;
     JTextArea textAreaChat;
 
-    public ChatWindow() throws HeadlessException {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(WIDTH, HEIGHT);
-        setLocationRelativeTo(null);
-        setTitle("OnlineChat - " + netStatus);
-        setResizable(false);
-
+    public ClientWindow(IClient client) throws HeadlessException {
+        this.client = client;
+        configureWindow();
+        createElements();
+        arrangeElements();
+        setVisible(true);
+    }
+    @Override
+    public void printMessage (String message){
+        textAreaChat.append(message + "\n");
+    }
+    public void sendMessage(String message) throws IOException {
+        client.sendMessage(message);
+    }
+    public void createElements(){
         buttonSend = new JButton("Send");
         buttonSend.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                textAreaChat.append(textFieldMessage.getText() + "\n");
-                textFieldMessage.setText("");
                 try {
-                    logger.writeLog(textAreaChat.getText());
+                    sendMessage(textFieldName.getText() + ": " + textFieldMessage.getText() + "\n");
+                    textFieldMessage.setText("");
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -43,9 +53,18 @@ public class ChatWindow extends JFrame {
         buttonConnect.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                netStatus = "Online";
-                setTitle("OnlineChat - " + netStatus);
-                textAreaChat.setText(logger.readLog());
+                if (netStatus == "Disconnect") {
+                    client.connect();
+                    netStatus = "Online";
+                    setTitle("OnlineChat - " + netStatus);
+                    buttonConnect.setText("Disconnect");
+                } else {
+                    client.disconnect();
+                    netStatus = "Disconnect";
+                    setTitle("OnlineChat - " + netStatus);
+                    buttonConnect.setText("Connect");
+                    textAreaChat.setText("");
+                }
             }
         });
         labelName = new JLabel("Name");
@@ -64,16 +83,14 @@ public class ChatWindow extends JFrame {
         textFieldMessage.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-
             }
 
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    textAreaChat.append(textFieldName.getText() + ": " + textFieldMessage.getText() + "\n");
-                    textFieldMessage.setText("");
                     try {
-                        logger.writeLog(textAreaChat.getText());
+                        sendMessage(textFieldName.getText() + ": " + textFieldMessage.getText() + "\n");
+                        textFieldMessage.setText("");
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
@@ -82,13 +99,14 @@ public class ChatWindow extends JFrame {
 
             @Override
             public void keyReleased(KeyEvent e) {
-
             }
         });
         textAreaChat = new JTextArea();
         textAreaChat.setEditable(false);
         textAreaChat.setWrapStyleWord(true);
+    }
 
+    public void arrangeElements(){
         GridBagLayout gridBagLayout = new GridBagLayout();
         JPanel panel = new JPanel();
         panel.setBorder(new EmptyBorder(4, 4, 4, 4));
@@ -157,8 +175,14 @@ public class ChatWindow extends JFrame {
         constraints.gridy = 4;
         panel.add(buttonSend, constraints);
 
-        add(panel);
-        setVisible(true);
+        this.add(panel);
+    }
 
+    public void configureWindow(){
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(WIDTH, HEIGHT);
+        setLocationRelativeTo(null);
+        setTitle("OnlineChat - " + netStatus);
+        setResizable(false);
     }
 }
