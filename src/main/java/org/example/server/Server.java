@@ -12,6 +12,7 @@ public class Server implements IServer {
     private List<IClient> clients;
     private String messages;
     private ILogger logger;
+
     public Server() {
         clients = new ArrayList<>();
         logger = new Logger();
@@ -27,7 +28,7 @@ public class Server implements IServer {
 
     @Override
     public void broadcastMessage(String message) {
-        for (IClient cli: this.clients) {
+        for (IClient cli : this.clients) {
             cli.printMessage(message);
         }
     }

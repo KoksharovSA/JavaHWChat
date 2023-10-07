@@ -1,7 +1,5 @@
 package org.example.client;
 
-import org.example.server.Logger;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -11,9 +9,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
-public class ClientWindow extends JFrame implements IWindow{
+public class ClientWindow extends JFrame implements IWindow {
     private IClient client;
-    Logger logger = new Logger();
+
     private static final int WIDTH = 500;
     private static final int HEIGHT = 650;
     String netStatus = "Disconnect";
@@ -29,14 +27,17 @@ public class ClientWindow extends JFrame implements IWindow{
         arrangeElements();
         setVisible(true);
     }
+
     @Override
-    public void printMessage (String message){
+    public void printMessage(String message) {
         textAreaChat.append(message + "\n");
     }
+
     public void sendMessage(String message) throws IOException {
         client.sendMessage(message);
     }
-    public void createElements(){
+
+    public void createElements() {
         buttonSend = new JButton("Send");
         buttonSend.addActionListener(new ActionListener() {
             @Override
@@ -106,7 +107,7 @@ public class ClientWindow extends JFrame implements IWindow{
         textAreaChat.setWrapStyleWord(true);
     }
 
-    public void arrangeElements(){
+    public void arrangeElements() {
         GridBagLayout gridBagLayout = new GridBagLayout();
         JPanel panel = new JPanel();
         panel.setBorder(new EmptyBorder(4, 4, 4, 4));
@@ -178,7 +179,7 @@ public class ClientWindow extends JFrame implements IWindow{
         this.add(panel);
     }
 
-    public void configureWindow(){
+    public void configureWindow() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);

@@ -5,7 +5,7 @@ import org.example.server.IServer;
 import java.io.IOException;
 import java.util.UUID;
 
-public class Client implements IClient{
+public class Client implements IClient {
     private String clientUUID;
     private IServer server;
     private IWindow clientWindow;
@@ -41,7 +41,7 @@ public class Client implements IClient{
 
     @Override
     public boolean sendMessage(String message) throws IOException {
-        if (message != "" && message != null){
+        if (message != "" && message != null) {
             server.recordMessage(message);
             return true;
         }
