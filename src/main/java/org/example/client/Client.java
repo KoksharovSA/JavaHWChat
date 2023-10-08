@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.util.UUID;
 
 public class Client implements IClient {
-    private String clientUUID;
-    private IServer server;
-    private IWindow clientWindow;
+    private final String clientUUID;
+    private final IServer server;
+    private final IWindow clientWindow;
 
     public Client(IServer server, IWindow clientWindow) {
         clientUUID = UUID.randomUUID().toString();
@@ -42,7 +42,7 @@ public class Client implements IClient {
 
     @Override
     public boolean sendMessage(String message) throws IOException {
-        if (message != "" && message != null) {
+        if (!message.isEmpty()) {
             server.recordMessage(message);
             return true;
         }
