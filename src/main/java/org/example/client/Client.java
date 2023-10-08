@@ -10,10 +10,11 @@ public class Client implements IClient {
     private IServer server;
     private IWindow clientWindow;
 
-    public Client(IServer server) {
+    public Client(IServer server, IWindow clientWindow) {
         clientUUID = UUID.randomUUID().toString();
         this.server = server;
-        clientWindow = new ClientWindow(this);
+        this.clientWindow = clientWindow;
+        clientWindow.setClientWindow(this);
     }
 
     @Override

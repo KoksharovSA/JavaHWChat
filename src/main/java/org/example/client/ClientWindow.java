@@ -12,6 +12,11 @@ import java.io.IOException;
 public class ClientWindow extends JFrame implements IWindow {
     private IClient client;
 
+    @Override
+    public void setClientWindow(IClient client) {
+        this.client = client;
+    }
+
     private static final int WIDTH = 500;
     private static final int HEIGHT = 650;
     String netStatus = "Disconnect";
@@ -20,8 +25,7 @@ public class ClientWindow extends JFrame implements IWindow {
     JLabel labelIP, labelPort, labelName;
     JTextArea textAreaChat;
 
-    public ClientWindow(IClient client) throws HeadlessException {
-        this.client = client;
+    public ClientWindow() throws HeadlessException {
         configureWindow();
         createElements();
         arrangeElements();
@@ -30,7 +34,7 @@ public class ClientWindow extends JFrame implements IWindow {
 
     @Override
     public void printMessage(String message) {
-        textAreaChat.append(message + "\n");
+        textAreaChat.append(message);
     }
 
     public void sendMessage(String message) throws IOException {
