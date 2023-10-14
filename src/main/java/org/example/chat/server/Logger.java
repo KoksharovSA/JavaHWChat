@@ -1,4 +1,4 @@
-package org.example.server;
+package org.example.chat.server;
 
 import java.io.*;
 import java.util.Scanner;

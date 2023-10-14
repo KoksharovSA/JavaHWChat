@@ -1,4 +1,4 @@
-package org.example.client;
+package org.example.chat.client;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

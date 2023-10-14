@@ -1,8 +1,6 @@
-package org.example.server;
+package org.example.chat.server;
 
-import org.example.client.IClient;
-import org.example.server.IServer;
-import org.example.server.Logger;
+import org.example.chat.client.IClient;
 
 import java.io.IOException;
 import java.util.ArrayList;

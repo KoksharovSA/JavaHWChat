@@ -1,6 +1,6 @@
-package org.example.server;
+package org.example.chat.server;
 
-import org.example.client.IClient;
+import org.example.chat.client.IClient;
 
 import java.io.IOException;
 

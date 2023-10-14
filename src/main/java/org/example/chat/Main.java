@@ -1,9 +1,9 @@
-package org.example;
+package org.example.chat;
 
-import org.example.client.Client;
-import org.example.client.ClientWindow;
-import org.example.server.Server;
-import org.example.server.IServer;
+import org.example.chat.client.Client;
+import org.example.chat.client.ClientWindow;
+import org.example.chat.server.Server;
+import org.example.chat.server.IServer;
 
 public class Main {
     public static void main(String[] args) {

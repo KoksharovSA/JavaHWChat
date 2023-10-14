@@ -1,4 +1,4 @@
-package org.example.client;
+package org.example.chat.client;
 
 public interface IWindow {
     void printMessage(String message);

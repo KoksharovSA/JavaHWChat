@@ -1,6 +1,6 @@
-package org.example.client;
+package org.example.chat.client;
 
-import org.example.server.IServer;
+import org.example.chat.server.IServer;
 
 import java.io.IOException;
 import java.util.UUID;
